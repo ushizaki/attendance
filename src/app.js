@@ -7,7 +7,18 @@ const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var hello = require('./routes/hello');
+
+// const mysql = require('mysql');
+// const con = mysql.createConnection({
+//   host: 'localhost',
+//   user: 'ushizaki',
+//   password: 'ushizaki'
+// });
+
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log('Connected');
+// });
 
 var app = express();
 
@@ -30,7 +41,6 @@ app.use(session(session_opt));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/hello', hello);
 
 var boardsRouter = require('./routes/boards');
 app.use('/boards', boardsRouter);

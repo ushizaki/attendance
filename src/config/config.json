@@ -3,8 +3,8 @@
     "username": "root",
     "password": "ushizaki",
     "database": "attendance",
-    "host": "mysql",
-    "dialect": "mysql"
+    "dialect": "sqlite",
+    "storage": "db-dev.sqlite3"
   },
   "test": {
     "username": "root",

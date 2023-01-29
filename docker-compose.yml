@@ -25,12 +25,13 @@ services:
       - DEBUG=app:*
     tty: true
     stdin_open: true
+    restart: always
     ports:
       - '3000:3000' 
     volumes:
       - ./src:/app
     working_dir: /app
-    command: /bin/bash
+    command:  npm run dev
     networks:
       - container-link
     depends_on:
