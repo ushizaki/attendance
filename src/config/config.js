@@ -1,10 +1,10 @@
 module.exports = {
     "development": {
       "username": "root",
-      "password": "ushizaki",
-      "database": "attendance",
-      "dialect": "sqlite",
-      "storage": "db-dev.sqlite3"
+      "password": null,
+      "database": "database_development",
+      "host": "mysql",
+      "dialect": "mysql"
     },
     "test": {
       "username": "root",

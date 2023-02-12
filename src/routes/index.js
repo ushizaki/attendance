@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  var data = {
+    title: 'Users/Login',
+    content:'名前とパスワードを入力して下さい。'
+  }
+  res.render('users/login', data);
 });
 
 module.exports = router;

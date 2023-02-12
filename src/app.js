@@ -8,17 +8,17 @@ const session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-// const mysql = require('mysql');
-// const con = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'ushizaki',
-//   password: 'ushizaki'
-// });
+const mysql = require('mysql');
+const con = mysql.createConnection({
+  host: 'mysql',
+  user: 'root',
+  password: 'ushizaki'
+});
 
-// con.connect(function(err) {
-//   if (err) throw err;
-//   console.log('Connected');
-// });
+con.connect(function(err) {
+  if (err) throw err;
+  console.log('Connected');
+});
 
 var app = express();
 
