@@ -8,11 +8,11 @@ const session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const con = mysql.createConnection({
   host: 'mysql',
   user: 'root',
-  password: 'ushizaki'
+  password: 'root'
 });
 
 con.connect(function(err) {
