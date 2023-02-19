@@ -7,6 +7,7 @@ const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var boardsRouter = require('./routes/boards');
 
 const mysql = require('mysql2');
 const con = mysql.createConnection({
@@ -23,6 +24,13 @@ con.connect(function(err) {
 
 var app = express();
 
+var session_opt = {
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60 * 60 * 1000 }
+};
+app.use(session(session_opt));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -32,18 +40,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-var session_opt = {
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 60 * 60 * 1000 }
-};
-app.use(session(session_opt));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-var boardsRouter = require('./routes/boards');
 app.use('/boards', boardsRouter);
 
 // catch 404 and forward to error handler

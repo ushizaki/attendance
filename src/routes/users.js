@@ -121,8 +121,13 @@ router.post('/login', (req, res, next) => {
       let back = req.session.back;
       if (back == null){
         back = '/';
-      }
+      
       res.redirect(back);
+
+      }else{
+      res.render('boards', data) ; 
+      }
+      
     } else {
       var data = {
         title:'Users/Login',
