@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
   //}
   ).then(usrs => {
     var data = {
-      title: 'Users/Index',
+      title: 'ユーザー/TOP',
       content: usrs
     }
     res.render('users/index', data);
@@ -31,7 +31,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/add', (req, res, next) => {
   var data = {
-    title: 'Users/Add',
+    title: 'ユーザー/追加',
     form: new db.User(),
     err: null
   }
@@ -52,7 +52,7 @@ router.post('/add', (req, res, next) => {
     })
     .catch(err=> {
       var data = {
-      title: 'Users/Add',
+      title: 'ユーザー/追加',
       form: new db.User(),
       err: err
     }
@@ -65,7 +65,7 @@ router.get('/edit',(req, res, next)=> {
   db.User.findByPk(req.query.id)
   .then(usr => {
     var data = {
-      title: 'Users/Edit',
+      title: 'ユーザー/編集',
       form: usr
     }
     res.render('users/edit', data);
@@ -87,7 +87,7 @@ router.get('/delete',(req, res, next)=> {
   db.User.findByPk(req.query.id)
   .then(usr => {
     var data = {
-      title: 'Users/Delete',
+      title: 'ユーザー/削除',
       form: usr
     }
     res.render('users/delete', data);
@@ -103,7 +103,7 @@ router.post('/delete',(req, res, next)=> {
 
 router.get('/login', (req, res, next) => {
   var data = {
-    title: 'Users/Login',
+    title: 'ユーザー/ログイン',
     content:'名前とパスワードを入力して下さい。'
   }
   res.render('users/login', data);
@@ -130,7 +130,7 @@ router.post('/login', (req, res, next) => {
       
     } else {
       var data = {
-        title:'Users/Login',
+        title:'ユーザー/ログイン',
         content:'名前かパスワードに問題があります。再度入力下さい。'
       }
       res.render('users/login', data);

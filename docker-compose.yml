@@ -3,6 +3,12 @@ services:
   mysql:
     image: mysql:5.7
     container_name: mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     env_file: ./mysql/mysql.env
     environment:
       - TZ=Asia/Tokyo
@@ -13,13 +19,10 @@ services:
     volumes:
       - ./mysql/conf:/etc/mysql/conf.d/:ro
       - mysqldata:/var/lib/mysql
-    healthcheck:
-        test: mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD
     networks:
       - container-link
 
   app:
-    entrypoint: ["/bin/bash", "./entrypoint.sh"]
     build: .
     container_name: app
     env_file: ./app.env

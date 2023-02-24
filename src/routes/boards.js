@@ -52,7 +52,7 @@ router.post('/add', (req, res, next)=> {
     db.sequelize.sync()
       .then(() => db.Board.create({
         userId: req.session.login.id,
-        message:req.body.msg
+        message: req.body.msg
       })
       .then(brd=>{
         res.redirect('/boards');
