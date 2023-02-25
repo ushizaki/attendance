@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
   //}
   ).then(usrs => {
     var data = {
-      title: 'ユーザー/TOP',
+      title: 'ユーザー/一覧',
       content: usrs
     }
     res.render('users/index', data);
@@ -131,7 +131,7 @@ router.post('/login', (req, res, next) => {
     } else {
       var data = {
         title:'ユーザー/ログイン',
-        content:'名前かパスワードに問題があります。再度入力下さい。'
+        content:'名前かパスワードに問題があります!再度入力下さい。'
       }
       res.render('users/login', data);
     }

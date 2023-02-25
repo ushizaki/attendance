@@ -9,7 +9,7 @@ const pnum = 10;
 function check(req, res) {
     if (req.session.login == null) {
         req.session.back = '/boards';
-        res.redirect('/users/login');console.log(req);
+        res.redirect('/users/login');
         return true;
     } else {
         return false;
@@ -18,7 +18,7 @@ function check(req, res) {
 
 //　トップページ
 router.get('/index',(req, res, next)=> {
-    res.redirect('/boards/0');console.log(req);
+    res.redirect('/boards/0');
 });
 
 //　トップページにページ番号をつけてアクセス

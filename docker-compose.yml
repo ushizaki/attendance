@@ -27,6 +27,7 @@ services:
     container_name: app
     env_file: ./app.env
     environment:
+      - CHOKIDAR_USEPOLLING=true
       - TZ=Asia/Tokyo
       - DEBUG=app:*
     tty: true
@@ -39,7 +40,7 @@ services:
     volumes:
       - ./src:/app
     working_dir: /app
-    command:  npm run dev
+    command:  npm run dev && docker exec -it app /bin/bash && npx sequelize-cli db:migrate
     networks:
       - container-link
     depends_on:
