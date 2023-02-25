@@ -118,15 +118,15 @@ router.post('/login', (req, res, next) => {
   }).then(usr=>{
     if (usr != null) {
       req.session.login = usr;
-      let back = req.session.back;
-      if (back == null){
-        back = '/';
+      let back = req.session.back;  console.log(usr);console.log(back);
+      // if (back == null){
+      //   back = '/';
       
-      res.redirect(back);
+      // res.redirect(back);
 
-      }else{
-      res.render('boards', data) ; 
-      }
+      // }else{
+      res.render('boards/index', data) ; 
+      // }
       
     } else {
       var data = {

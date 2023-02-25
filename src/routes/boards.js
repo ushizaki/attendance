@@ -21,6 +21,14 @@ router.get('/index',(req, res, next)=> {
     res.redirect('/boards/0');
 });
 
+router.post('/index',(req, res, next)=> {
+    var data = {
+        title:'ボード/TOP',
+        content: "ヤッホー"
+      }
+    res.render('../views/boards/index', data);
+});
+
 //　トップページにページ番号をつけてアクセス
 router.get('/:page',(req, res, next)=> {
     if (check(req,res)){ return };
