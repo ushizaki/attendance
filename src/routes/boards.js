@@ -21,6 +21,10 @@ router.get('/',(req, res, next)=> {
   res.redirect('/boards/0');
 });
 
+router.get('boards/index',(req, res, next)=> {
+  res.redirect('/');
+});
+
 // トップページにページ番号をつけてアクセス
 router.get('/:page',(req, res, next)=> {
   if (check(req,res)){ return };

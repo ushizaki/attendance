@@ -40,7 +40,8 @@ services:
     volumes:
       - ./src:/app
     working_dir: /app
-    command:  npm run dev && docker exec -it app /bin/bash && npx sequelize-cli db:migrate
+    privileged: true
+    command:  npm run dev && /bin/sh -c "docker exec -it app && npx sequelize-cli db:migrate"
     networks:
       - container-link
     depends_on:

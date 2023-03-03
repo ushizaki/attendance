@@ -110,19 +110,22 @@ router.get('/login', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
+  console.log(req.body.name)
+  console.log(req.body.pass)
   db.User.findOne({
     where:{
       name:req.body.name,
       pass:req.body.pass,
     }
-  }).then(usr=>{
+  }).then(usr=>{console.log(usr)
     if (usr != null) {
       req.session.login = usr;
       let back = req.session.back;
       if (back == null){
         back = '/';
       }
-      res.redirect(back);
+      console.log("-------------------------------")
+      res.render('boards/index');
     } else {
       var data = {
         title:'Users/Login',
