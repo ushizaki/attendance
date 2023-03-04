@@ -103,32 +103,30 @@ router.post('/delete',(req, res, next)=> {
 
 router.get('/login', (req, res, next) => {
   var data = {
-     title:'Users/Login',
+     title:'ユーザー/ログイン',
      content:'名前とパスワードを入力下さい。'
   }
   res.render('users/login', data);
 });
 
 router.post('/login', (req, res, next) => {
-  console.log(req.body.name)
-  console.log(req.body.pass)
   db.User.findOne({
     where:{
       name:req.body.name,
       pass:req.body.pass,
     }
-  }).then(usr=>{console.log(usr)
+  }).then(usr=>{
     if (usr != null) {
       req.session.login = usr;
-      let back = req.session.back;
+      let back = req.session.cookie.path;
       if (back == null){
         back = '/';
       }
-      console.log("-------------------------------")
-      res.render('boards/index');
+      // res.redirect(back);console.log(back);
+      res.redirect('/boards');
     } else {
       var data = {
-        title:'Users/Login',
+        title:'ユーザー/ログイン',
         content:'名前かパスワードに問題があります。再度入力下さい。'
       }
       res.render('users/login', data);

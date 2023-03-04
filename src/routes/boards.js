@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 
 const pnum = 10;
 
-// ログインのチェック
+//ログインのチェック
 function check(req,res) {
   if (req.session.login == null) {
     req.session.back = '/boards';
@@ -18,16 +18,13 @@ function check(req,res) {
 
 // トップページ
 router.get('/',(req, res, next)=> {
-  res.redirect('/boards/0');
-});
-
-router.get('boards/index',(req, res, next)=> {
-  res.redirect('/');
+  res.redirect('/boards/0');console.log("--------------1-----------------")
 });
 
 // トップページにページ番号をつけてアクセス
 router.get('/:page',(req, res, next)=> {
-  if (check(req,res)){ return };
+  console.log("--------------2-----------------")
+  // if (check(req,res)){ return };
   const pg = req.params.page * 1;
   db.Board.findAll({
     offset: pg * pnum,
@@ -47,7 +44,7 @@ router.get('/:page',(req, res, next)=> {
       page:pg
     }
     res.render('boards/index', data);
-  });
+  });console.log("--------------3-----------------");
 });
 
 // メッセージフォームの送信処理
