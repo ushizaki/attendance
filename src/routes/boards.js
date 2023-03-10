@@ -18,12 +18,11 @@ function check(req,res) {
 
 // トップページ
 router.get('/',(req, res, next)=> {
-  res.redirect('/boards/0');console.log("--------------1-----------------")
+  res.redirect('/boards/0');
 });
 
 // トップページにページ番号をつけてアクセス
 router.get('/:page',(req, res, next)=> {
-  console.log("--------------2-----------------")
   // if (check(req,res)){ return };
   const pg = req.params.page * 1;
   db.Board.findAll({
@@ -44,7 +43,7 @@ router.get('/:page',(req, res, next)=> {
       page:pg
     }
     res.render('boards/index', data);
-  });console.log("--------------3-----------------");
+  });
 });
 
 // メッセージフォームの送信処理
@@ -53,13 +52,13 @@ router.post('/add',(req, res, next)=> {
   db.sequelize.sync()
     .then(() => db.Board.create({
       userId: req.session.login.id,
-      message:req.body.msg
+      message: req.body.msg
     })
-    .then(brd=>{
-      res.redirect('/boards');
+    .then(brd=>{console.log(brd);
+      res.redirect('/boards');console.log("--------then-------");
     })
-    .catch((err)=>{
-      res.redirect('/boards');
+    .catch((err)=>{console.log(err);
+      res.redirect('/boards');console.log("--------catch-------");
     })
     )
 });
