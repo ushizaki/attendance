@@ -17,7 +17,7 @@
       <%= title %></h1>
   </header>
   <div role="main">
-    <p class="h4"><%= userName %>'s messages.</p>
+    <p class="h4"><%= userName %>さんのメッセージ</p>
     <table class="table mt-5">
       <% for(let i in content) { %>
       <%- include('data_item', {val:content[i]}) %>

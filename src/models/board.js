@@ -17,7 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     }
-  }, {});
+  }, 
+  {
+    charset: 'utf8',
+    collate: 'utf8_general_ci'
+  });
   Board.associate = function(models) {
     Board.belongsTo(models.User);
   };

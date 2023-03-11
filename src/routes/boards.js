@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../models/index');
 const { Op } = require("sequelize");
 
-const pnum = 10;
+const pnum = 5;
 
 //ログインのチェック
 function check(req,res) {
@@ -25,6 +25,7 @@ router.get('/',(req, res, next)=> {
 router.get('/:page',(req, res, next)=> {
   // if (check(req,res)){ return };
   const pg = req.params.page * 1;
+  console.log(req);
   db.Board.findAll({
     offset: pg * pnum,
     limit: pnum,
@@ -37,8 +38,8 @@ router.get('/:page',(req, res, next)=> {
     }]
   }).then(brds => {
     var data = {
-      title: 'Boards',
-      login:req.session.login,
+      title: 'メッセージボードTOP',
+      login: req.session.login,
       content: brds,
       page:pg
     }
@@ -54,11 +55,11 @@ router.post('/add',(req, res, next)=> {
       userId: req.session.login.id,
       message: req.body.msg
     })
-    .then(brd=>{console.log(brd);
-      res.redirect('/boards');console.log("--------then-------");
+    .then(brd=>{
+      res.redirect('/boards');
     })
-    .catch((err)=>{console.log(err);
-      res.redirect('/boards');console.log("--------catch-------");
+    .catch((err)=>{
+      res.redirect('/boards');
     })
     )
 });
@@ -81,7 +82,7 @@ router.get('/home/:user/:id/:page',(req, res, next)=> {
     }]
   }).then(brds => {
     var data = {
-      title: 'Boards',
+      title: 'メッセージボード（個人）',
       login:req.session.login,
       userId:id,
       userName:req.params.user,
