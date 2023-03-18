@@ -1,0 +1,9 @@
+<% if (val != null){ %>
+  <tr class="row">
+    <th class="col-6">
+      <a class="text-dark" href="/attendance/home/<%=val.User.name %>/<%=val.userId %>">
+        <%= val.User.name %></a></th>
+    <td class="col-3"><%= val.begin_time %></td>
+    <td class="col-3"><%= val.finish_time %></td>
+  </tr>
+  <% } %>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="content-type"
+        content="text/html; charset=UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+
+<body class="container">
+  <header>
+    <h1 class="display-4">
+      <%= title %></h1>
+  </header>
+  <div role="main">
+    <p class="h4">こんにちは！ <%= login.name %>さん</p>
+    <P>ログイン時刻：<%= now_time %></p>
+    <P>出勤／退勤ボタンを押してください</P>
+    <form method="post" action="/attendance/begin">
+      <div class="row">
+        <div class="col-10">
+          <input type="hidden" name="begin_time" value=""
+            class="form-control">
+        </div>
+        <input type="submit" value="出勤" 
+          class="btn btn-primary col-6">
+      </div>
+    </form>
+    <form method="post" action="/attendance/finish">
+      <div class="row">
+        <div class="col-10">
+          <input type="hidden" name="finish_time" value=""
+            class="form-control">
+        </div>
+        <input type="submit" value="退勤" 
+          class="btn btn-danger col-6">
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

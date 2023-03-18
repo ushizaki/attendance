@@ -9,6 +9,7 @@ const session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var boardsRouter = require('./routes/boards');
+var attendanceRouter = require('./routes/attendance');
 
 const mysql = require('mysql2');
 const con = mysql.createConnection({
@@ -46,6 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/boards', boardsRouter);
+app.use('/attendance', attendanceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
