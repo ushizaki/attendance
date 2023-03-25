@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     collate: 'utf8_general_ci'
   });
   User.associate = function(models) {
-    User.hasMany(models.Board);
+    User.hasMany(models.Attendance);
   };
   return User;
 };

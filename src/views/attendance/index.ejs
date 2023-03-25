@@ -17,7 +17,11 @@
   </header>
   <div role="main">
     <p class="h4">こんにちは！ <%= login.name %>さん</p>
-    <P>ログイン時刻：<%= now_time %></p>
+    <P id="now_time"></p><br>
+    <div class = attendance_time>
+      <P id="begin_time">本日の出勤時刻 > <%= begin_time %></p>
+      <P id="finish_time">本日の退勤時刻 > <%= finish_time %></p>
+    </div><br>
     <P>出勤／退勤ボタンを押してください</P>
     <form method="post" action="/attendance/begin">
       <div class="row">
@@ -39,7 +43,19 @@
           class="btn btn-danger col-6">
       </div>
     </form>
+    <p class="mt-4"><a href="/boards">&lt;&lt; 掲示板へ &gt;&gt;</a>
   </div>
 </body>
 
 </html>
+<script>
+  function showClock() {
+    var nowTime = new Date();
+    var nowHour = nowTime.getHours(); 
+    var nowMin  = nowTime.getMinutes(); 
+    var nowSec  = nowTime.getSeconds();
+    var msg = "現在時刻 > " + nowHour + ":" + nowMin + ":" + nowSec;
+    document.getElementById('now_time').innerHTML = msg;
+  }
+  setInterval('showClock()', 1000);
+</script>

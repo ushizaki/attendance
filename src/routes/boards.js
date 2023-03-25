@@ -25,7 +25,6 @@ router.get('/',(req, res, next)=> {
 router.get('/:page',(req, res, next)=> {
   // if (check(req,res)){ return };
   const pg = req.params.page * 1;
-  console.log(req);
   db.Board.findAll({
     offset: pg * pnum,
     limit: pnum,
@@ -38,7 +37,7 @@ router.get('/:page',(req, res, next)=> {
     }]
   }).then(brds => {
     var data = {
-      title: 'メッセージボードTOP',
+      title: '掲示板TOP',
       login: req.session.login,
       content: brds,
       page:pg
@@ -82,7 +81,7 @@ router.get('/home/:user/:id/:page',(req, res, next)=> {
     }]
   }).then(brds => {
     var data = {
-      title: 'メッセージボード（個人）',
+      title: '個人の投稿一覧',
       login:req.session.login,
       userId:id,
       userName:req.params.user,
