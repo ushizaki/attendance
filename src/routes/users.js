@@ -102,8 +102,6 @@ router.post('/delete',(req, res, next)=> {
 });
 
 router.get('/login', (req, res, next) => {
-  var now = new Date();
-  console.log(now);
   var data = {
      title:'ユーザー/ログイン',
      content:'名前とパスワードを入力下さい。'
@@ -124,7 +122,6 @@ router.post('/login', (req, res, next) => {
       if (back == null){
         back = '/';
       }
-      // res.redirect(back);console.log(back);
       res.redirect('/attendance');
     } else {
       var data = {
