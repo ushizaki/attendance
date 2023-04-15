@@ -18,6 +18,9 @@
   <div role="main">
     <p class="h4">こんにちは！ <%= login.name %>さん</p>
     <P id="now_time"></p><br>
+    <div id="error-message">
+      <p><%= message %></p>
+    </div>
     <div class = attendance_time>
       <P id="begin_time">本日の出勤時刻 > <%= begin_time %></p>
       <P id="finish_time">本日の退勤時刻 > <%= finish_time %></p>
@@ -26,7 +29,9 @@
     <form method="post" action="/attendance/begin">
       <div class="row">
         <div class="col-10">
-          <input type="hidden" name="begin_time" value=""
+          <input type="hidden" name="begin_time" value="<%= begin_time %>"
+            class="form-control">
+          <input type="hidden" name="finish_time" value='<%= finish_time %>'
             class="form-control">
         </div>
         <input type="submit" value="出勤" 
@@ -36,7 +41,9 @@
     <form method="post" action="/attendance/finish">
       <div class="row">
         <div class="col-10">
-          <input type="hidden" name="finish_time" value=""
+          <input type="hidden" name="begin_time" value="<%= begin_time %>"
+            class="form-control">
+          <input type="hidden" name="finish_time" value='<%= finish_time %>'
             class="form-control">
         </div>
         <input type="submit" value="退勤" 
@@ -49,12 +56,15 @@
 
 </html>
 <style>
+  #error-message {
+    color:red
+  }
 </style>
 <script>
   function showClock() {
     var nowTime = new Date();
     var nowHour = nowTime.getHours(); 
-    var nowMin  = nowTime.getMinutes(); 
+    var nowMin  = nowTime.getMinutes().toString().padStart(2, '0'); 
     var nowSec  = nowTime.getSeconds();
     var msg = "現在時刻 > " + nowHour + ":" + nowMin + ":" + nowSec;
     document.getElementById('now_time').innerHTML = msg;
