@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="content-type"
+        content="text/html; charset=UTF-8">
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body class="container">
+    <header>
+      <h1 class="display-4">
+        <%= title %></h1>
+    </header>
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark"><%= title %></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <table id="datatable" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>ユーザーID</th>
+                        <th>出勤時刻</th>
+                        <th>退勤時刻</th>
+                        <th>更新日時</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% list.forEach(function (v, key) { %>
+                      <tr>
+                        <td><%= v.userId %></td>
+                        <td><%= v.begin_time %></td>
+                        <td><%= v.finishi_time %></td>
+                        <td><%= v.updatedAt %></td>
+                      </tr>
+                      <% }); %>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>ユーザーID</th>
+                        <th>出勤時刻</th>
+                        <th>退勤時刻</th>
+                        <th>更新日時</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+              <div class="text-left">
+                <p class="mt-4"></p><a href="/attendance">&lt;&lt; もどる</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+</body>
+</html>

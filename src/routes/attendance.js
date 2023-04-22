@@ -4,7 +4,6 @@ const db = require('../models/index');
 const moment = require('moment');
 const { Op } = require("sequelize");
 
-
 const today = moment().format('YYYY-MM-DD 00:00:00');
 
 //ログインのチェック
@@ -132,6 +131,37 @@ router.post('/finish',(req, res, next)=> {
   }
 });
 
-
+//出退勤履歴
+router.get('/history',(req, res, next)=> {
+  if (check(req,res)){ return };
+  db.Attendance.findAll({
+    where:{
+      userId: req.session.login.id
+    },
+    // offset: pg * pnum,
+    // limit: pnum,
+    // order: [
+    //   ['createdAt', 'DESC']
+    // ],
+    include: [{
+      model: db.User,
+      required: true
+    }]
+  }).then(attendances => {
+    var list = [];
+    for (var i = 0; i < attendances.length; i++) {
+      list.push(attendances[i].dataValues)
+    };
+    
+    console.log('---------------- list -------------------------');
+    console.log(list);
+    var data = {
+      title: '出退勤履歴',
+      login: req.session.login,
+      list: list
+    }
+    res.render('attendance/history', data);
+  });
+});
 
 module.exports = router;
