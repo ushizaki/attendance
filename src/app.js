@@ -16,7 +16,9 @@ const con = mysql.createConnection({
   host: 'mysql',
   user: 'root',
   password: 'root',
-  database: 'attendance'
+  database: 'attendance',
+  dateStrings: 'date',
+  timezone:'jst'
 });
 
 con.connect(function(err) {
@@ -27,10 +29,12 @@ con.connect(function(err) {
 var app = express();
 
 var session_opt = {
-  secret: 'keyboard cat',
+  secret: 'attendanceSecret',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60 * 60 * 1000 }
+  cookie: { 
+    maxAge: 60 * 60 * 1000 
+  }
 };
 app.use(session(session_opt));
 // view engine setup
@@ -42,12 +46,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+//app.use(bodyParser);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/boards', boardsRouter);
 app.use('/attendance', attendanceRouter);
+
+app.get('/', (req, res) => {
+  res.cookie('name3', 'value3', {
+    domain: '.wakuwakubank.com',
+    path: '/cookie',
+    secure: true
+  })
+
+  res.json({})
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

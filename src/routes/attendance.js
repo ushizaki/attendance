@@ -4,7 +4,7 @@ const db = require('../models/index');
 const moment = require('moment');
 const { Op } = require("sequelize");
 
-const today = moment().format('YYYY-MM-DD 00:00:00');
+const today = moment().format('YYYY-MM-DD 00:00:00'); 
 
 //ログインのチェック
 function check(req,res) {
@@ -17,8 +17,24 @@ function check(req,res) {
   }
 };
 
+// //クッキーのチェック
+// function checkCookie(req,res) {
+//   if (req.cookies) {
+//     var preCookie = req.cookies;
+//   }
+//   if ( preCookie !== req.cookies;) {
+//     req.session.back = '/attendance';
+//     res.redirect('/users/login');
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
+
 // 出退勤ページ
 router.get('/',(req, res, next)=> {
+  if (check(req,res)){ return };
+  //if (checkCookie(req,res)){ return };
   db.Attendance.findAll({
     attributes: ['begin_time', 'finish_time'],
     where:{
@@ -52,6 +68,8 @@ router.get('/',(req, res, next)=> {
 
 // 出勤時間の送信処理
 router.post('/begin',(req, res, next)=> {
+  console.log("------------- cookie ---------------");
+  console.log(req.cookies);
   if (check(req,res)){ return };
   const begin_time = req.body.begin_time;
   const finish_time = req.body.finish_time;
@@ -85,6 +103,8 @@ router.post('/begin',(req, res, next)=> {
 
 // 退勤時間の送信処理
 router.post('/finish',(req, res, next)=> {
+  console.log("------------- cookie ---------------");
+  console.log(req.cookies);
   if (check(req,res)){ return };
   const begin_time = req.body.begin_time;
   const finish_time = req.body.finish_time;
@@ -133,6 +153,8 @@ router.post('/finish',(req, res, next)=> {
 
 //出退勤履歴
 router.get('/history',(req, res, next)=> {
+  console.log("------------- cookie ---------------");
+  console.log(req.cookies);
   if (check(req,res)){ return };
   db.Attendance.findAll({
     where:{
@@ -152,9 +174,6 @@ router.get('/history',(req, res, next)=> {
     for (var i = 0; i < attendances.length; i++) {
       list.push(attendances[i].dataValues)
     };
-    
-    console.log('---------------- list -------------------------');
-    console.log(list);
     var data = {
       title: '出退勤履歴',
       login: req.session.login,
@@ -162,6 +181,17 @@ router.get('/history',(req, res, next)=> {
     }
     res.render('attendance/history', data);
   });
+});
+
+//ログアウト
+router.get('/logout', (req, res, next) => {
+  req.session.destroy();
+  console.log(req.session);
+  var data = {
+     title:'ユーザー/ログイン',
+     content:'名前とパスワードを入力下さい。'
+  }
+  res.render('users/login', data);
 });
 
 module.exports = router;

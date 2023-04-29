@@ -20,15 +20,6 @@
         <%= title %></h1>
     </header>
     <div class="content-wrapper">
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0 text-dark"><%= title %></h1>
-            </div>
-          </div>
-        </div>
-      </div>
       <section class="content">
         <div class="container-fluid">
           <div class="row">
@@ -43,27 +34,30 @@
                     <thead>
                       <tr>
                         <th>ユーザーID</th>
+                        <th>年</th>
+                        <th>日付</th>
                         <th>出勤時刻</th>
                         <th>退勤時刻</th>
-                        <th>更新日時</th>
                       </tr>
                     </thead>
                     <tbody>
                       <% list.forEach(function (v, key) { %>
                       <tr>
                         <td><%= v.userId %></td>
-                        <td><%= v.begin_time %></td>
-                        <td><%= v.finishi_time %></td>
-                        <td><%= v.updatedAt %></td>
+                        <td><%= v.begin_time.toLocaleDateString().slice(5) %></td>
+                        <td><%= v.begin_time.toLocaleDateString().slice(0, 4) %></td>
+                        <td><%= v.begin_time.toLocaleTimeString() %></td>
+                        <td><%= v.finish_time.toLocaleTimeString() %></td>
                       </tr>
                       <% }); %>
                     </tbody>
                     <tfoot>
                       <tr>
                         <th>ユーザーID</th>
+                        <th>年</th>
+                        <th>日付</th>
                         <th>出勤時刻</th>
                         <th>退勤時刻</th>
-                        <th>更新日時</th>
                       </tr>
                     </tfoot>
                   </table>

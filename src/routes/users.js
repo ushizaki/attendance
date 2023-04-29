@@ -118,6 +118,7 @@ router.post('/login', (req, res, next) => {
   }).then(usr=>{
     if (usr != null) {
       req.session.login = usr;
+      req.body.cookie = req.cookies;
       let back = req.session.cookie.path;
       if (back == null){
         back = '/';
