@@ -53,15 +53,6 @@ app.use('/users', usersRouter);
 app.use('/boards', boardsRouter);
 app.use('/attendance', attendanceRouter);
 
-app.get('/', (req, res) => {
-  res.cookie('name3', 'value3', {
-    domain: '.wakuwakubank.com',
-    path: '/cookie',
-    secure: true
-  })
-
-  res.json({})
-})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

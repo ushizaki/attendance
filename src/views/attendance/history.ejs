@@ -44,10 +44,10 @@
                       <% list.forEach(function (v, key) { %>
                       <tr>
                         <td><%= v.userId %></td>
-                        <td><%= v.begin_time.toLocaleDateString().slice(5) %></td>
-                        <td><%= v.begin_time.toLocaleDateString().slice(0, 4) %></td>
-                        <td><%= v.begin_time.toLocaleTimeString() %></td>
-                        <td><%= v.finish_time.toLocaleTimeString() %></td>
+                        <td><%= v.begin_time.getFullYear() %></td>
+                        <td><%= v.begin_time.toLocaleDateString().slice(0, -5) %></td>
+                        <td><%= v.begin_time.toString().substring(16, 21) %></td>
+                        <td><%= v.finish_time.toString().substring(16, 21) %></td>
                       </tr>
                       <% }); %>
                     </tbody>
